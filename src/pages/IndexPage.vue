@@ -1,20 +1,31 @@
 <template>
   <q-page padding>
     <div class="q-pa-md">
-      <q-table title="Artigo" :rows="posts" :columns="columns" row-key="name">
+      <q-table title="Áreas em acompanhamento" :rows="posts" :columns="columns" row-key="name">
         <template v-slot:top>
-          <span class="text-h5">Artigo</span> <q-space/>
+          <span class="text-h5">Áreas em acompanhamento</span> <q-space/>
           <q-btn color="primary" label="Novo" :to="{name: 'formPost'}"/>
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props" class="q-gutter-sm">
-            <q-btn icon="edit" color="primary" dense size="sm" @click="handleEditPost(props.row.id)"></q-btn>
+            <q-btn icon="edit"
+             color="primary"
+             dense size="sm"
+             @click="handleEditPost(props.row.id)"
+             ></q-btn>
             <q-btn
               icon="delete"
               color="negative"
               dense
               size="sm"
               @click="handleDeletePost(props.row.id)"
+             />
+             <q-btn
+             icon="check"
+             color="green"
+             dense
+             size="sm"
+             @click="handleDetalhesPost(props.row.id)"
             />
           </q-td>
         </template>
@@ -38,8 +49,12 @@ export default defineComponent({
     const router = useRouter()
     const columns = [
       { name: 'id', field: 'id', label: 'Id', sortable: true },
-      { name: 'nome', field: 'nome', label: 'Nome', sortable: true },
-      { name: 'profissao', field: 'profissao', label: 'Profissão', sortable: true },
+      { name: 'numero_corpo', field: 'numero_corpo', label: 'Número do Corpo', sortable: true },
+      { name: 'numero_superficiarios', field: 'numero_superficiarios', label: 'Nº de Superficiários', sortable: true },
+      { name: 'perimetro_area', field: 'perimetro_area', label: 'Perímetro da Área', sortable: true },
+      { name: 'situacao_area', field: 'situacao_area', label: 'Situação da Área', sortable: true },
+      { name: 'data_abertura', field: 'data_abertura', label: 'Data de Abertura', sortable: true },
+      { name: 'data_reabilitacao', field: 'data_reabilitacao', label: 'Data de Reabilitação', sortable: true },
       { name: 'actions', field: 'actions', label: 'Ações' }
     ]
     onMounted(() => {
@@ -74,11 +89,17 @@ export default defineComponent({
     const handleEditPost = async (id) => {
       router.push({ name: 'formPost', params: { id } })
     }
+
+    const handleDetalhesPost = async (id) => {
+      router.push({ name: 'formDetalhes', params: { id } })
+    }
+
     return {
       posts,
       columns,
       handleDeletePost,
-      handleEditPost
+      handleEditPost,
+      handleDetalhesPost
     }
   }
 })

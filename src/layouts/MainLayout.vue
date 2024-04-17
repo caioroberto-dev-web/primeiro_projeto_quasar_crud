@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar Crud Axios
+          Quasar APP TESTE
         </q-toolbar-title>
 
       </q-toolbar>
